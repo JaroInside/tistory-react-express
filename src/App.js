@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 
@@ -11,12 +10,12 @@ class App extends Component {
       name: '',
       project: ''
     }
+    this._onClick = this._onClick.bind(this);
   }
 
-  onClick() {
+  _onClick() {
     axios.get(`/api`)
     .then( response => {
-      console.log(response);
       this.setState({
         name: response.data.name,
         project: response.data.project
@@ -26,19 +25,12 @@ class App extends Component {
   }
 
   render() {
-    
     const { name , project } = this.state;
-
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          Hello {name} / {project}
-        </p>
-        <button onClick={this.onClick.bind(this)}>api 호출</button>
+        <h1>{project}</h1>
+        <h1>Hello {name}</h1>
+        <button onClick={this._onClick}>api 호출</button>
       </div>
     );
   }
